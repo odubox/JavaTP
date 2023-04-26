@@ -1,2 +1,0 @@
-# JavaTP
-Entrega de TP
