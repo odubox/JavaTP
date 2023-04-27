@@ -1,6 +1,6 @@
 package Clases;
 
-import Prodep.TrabajoPractico31;
+import Prodep.TrabajoPractico32;
 import java.sql.*;
 import java.util.Arrays;
 
@@ -16,18 +16,18 @@ public class LecturaDeArchivos {
 
         try {
             // Abrir la conexión
-            TrabajoPractico31.conexion = DriverManager.getConnection(Configuracion.DB_URL, Configuracion.USER, Configuracion.PASS);
+            TrabajoPractico32.conexion = DriverManager.getConnection(Configuracion.DB_URL, Configuracion.USER, Configuracion.PASS);
 
             // Ejecutar una consulta
-            TrabajoPractico31.consulta = TrabajoPractico31.conexion.createStatement();
+            TrabajoPractico32.consulta = TrabajoPractico32.conexion.createStatement();
             String sql;
 
-            TrabajoPractico31.consulta = TrabajoPractico31.conexion.createStatement();
+            TrabajoPractico32.consulta = TrabajoPractico32.conexion.createStatement();
             //String sql;
             sql = "SELECT * FROM jugadores";
 
             //En la variable resultado obtendremos las distintas filas que nos devolvió la base
-            ResultSet resultado = TrabajoPractico31.consulta.executeQuery(sql);
+            ResultSet resultado = TrabajoPractico32.consulta.executeQuery(sql);
 
             // Obtener las distintas filas de la consulta
 
@@ -37,26 +37,26 @@ public class LecturaDeArchivos {
                 int idJ = resultado.getInt("idJugador");
                 String Nombre = resultado.getString("nombre");
                 Jugador jugadores = new Jugador(idJ, Nombre);
-                TrabajoPractico31.MisColecciones.matJugadores[i] = jugadores;
+                TrabajoPractico32.MisColecciones.matJugadores[i] = jugadores;
                 i++;
 
             }
             System.out.println("Leidos " + i + " jugadores de la DB");
             // Esto se utiliza para cerrar la conexión con la base de datos
             resultado.close();
-            TrabajoPractico31.consulta.close();
-            TrabajoPractico31.conexion.close();
+            TrabajoPractico32.consulta.close();
+            TrabajoPractico32.conexion.close();
         } catch (SQLException se) {
             // Excepción ante problemas de conexión
             //se.printStackTrace();
 
-            errorDeLectura("TP", TrabajoPractico31.conexion, TrabajoPractico31.consulta, 1);
-            cerrarConexionDB("tp", TrabajoPractico31.conexion, TrabajoPractico31.consulta);
+            errorDeLectura("TP", TrabajoPractico32.conexion, TrabajoPractico32.consulta, 1);
+            cerrarConexionDB("tp", TrabajoPractico32.conexion, TrabajoPractico32.consulta);
             System.exit(1);
         }
 
         //***** REDIMENSIONO LA MATRIZ **************
-        TrabajoPractico31.MisColecciones.matJugadores = Arrays.copyOfRange(TrabajoPractico31.MisColecciones.matJugadores, 0, i);
+        TrabajoPractico32.MisColecciones.matJugadores = Arrays.copyOfRange(TrabajoPractico32.MisColecciones.matJugadores, 0, i);
     }
 
     public static void leePartidos() {
@@ -65,18 +65,18 @@ public class LecturaDeArchivos {
 
         try {
             // Abrir la conexión
-            TrabajoPractico31.conexion = DriverManager.getConnection(Configuracion.DB_URL, Configuracion.USER, Configuracion.PASS);
+            TrabajoPractico32.conexion = DriverManager.getConnection(Configuracion.DB_URL, Configuracion.USER, Configuracion.PASS);
 
             // Ejecutar una consulta
-            TrabajoPractico31.consulta = TrabajoPractico31.conexion.createStatement();
+            TrabajoPractico32.consulta = TrabajoPractico32.conexion.createStatement();
             String sql;
 
-            TrabajoPractico31.consulta = TrabajoPractico31.conexion.createStatement();
+            TrabajoPractico32.consulta = TrabajoPractico32.conexion.createStatement();
             //String sql;
             sql = "SELECT * FROM Partidos";
 
             //En la variable resultado obtendremos las distintas filas que nos devolvió la base
-            ResultSet resultado = TrabajoPractico31.consulta.executeQuery(sql);
+            ResultSet resultado = TrabajoPractico32.consulta.executeQuery(sql);
 
 
 
@@ -93,24 +93,24 @@ public class LecturaDeArchivos {
                 int gv =  resultado.getInt("GolesVisitante");
 
                 Partido partido = new Partido(Idpartido,ronda,equipoLocal,equipoVisitante,gl,gv);
-                TrabajoPractico31.MisColecciones.matPartidos[i]= partido;
+                TrabajoPractico32.MisColecciones.matPartidos[i]= partido;
                 i++;
-                TrabajoPractico31.cantPartidos = i;
+                TrabajoPractico32.cantPartidos = i;
             }
             System.out.println("Leidos " + i + " partidos de la DB");
             // Esto se utiliza para cerrar la conexión con la base de datos
             resultado.close();
-            TrabajoPractico31.consulta.close();
-            TrabajoPractico31.conexion.close();
+            TrabajoPractico32.consulta.close();
+            TrabajoPractico32.conexion.close();
         } catch (SQLException se) {
             // Excepción ante problemas de conexión
             //se.printStackTrace();
-            errorDeLectura("tp - Partidos", TrabajoPractico31.conexion, TrabajoPractico31.consulta, 1);
-            cerrarConexionDB("tp", TrabajoPractico31.conexion, TrabajoPractico31.consulta);
+            errorDeLectura("tp - Partidos", TrabajoPractico32.conexion, TrabajoPractico32.consulta, 1);
+            cerrarConexionDB("tp", TrabajoPractico32.conexion, TrabajoPractico32.consulta);
             System.exit(1);
         }
         // ***** REDIMENSIONO LA MATRIZ **************
-        TrabajoPractico31.MisColecciones.matPartidos = Arrays.copyOfRange(TrabajoPractico31.MisColecciones.matPartidos, 0, i);
+        TrabajoPractico32.MisColecciones.matPartidos = Arrays.copyOfRange(TrabajoPractico32.MisColecciones.matPartidos, 0, i);
     }
 
 
@@ -120,18 +120,18 @@ public class LecturaDeArchivos {
 
         try {
             // Abrir la conexión
-            TrabajoPractico31.conexion = DriverManager.getConnection(Configuracion.DB_URL, Configuracion.USER, Configuracion.PASS);
+            TrabajoPractico32.conexion = DriverManager.getConnection(Configuracion.DB_URL, Configuracion.USER, Configuracion.PASS);
 
             // Ejecutar una consulta
-            TrabajoPractico31.consulta = TrabajoPractico31.conexion.createStatement();
+            TrabajoPractico32.consulta = TrabajoPractico32.conexion.createStatement();
             String sql;
 
-            TrabajoPractico31.consulta = TrabajoPractico31.conexion.createStatement();
+            TrabajoPractico32.consulta = TrabajoPractico32.conexion.createStatement();
             //String sql;
             sql = "SELECT * FROM pronosticos";
 
             //En la variable resultado obtendremos las distintas filas que nos devolvió la base
-            ResultSet resultado = TrabajoPractico31.consulta.executeQuery(sql);
+            ResultSet resultado = TrabajoPractico32.consulta.executeQuery(sql);
 
             // Obtener las distintas filas de la consulta
 
@@ -156,26 +156,26 @@ public class LecturaDeArchivos {
                     }
                 }
                 Pronostico  pronostico = new Pronostico(numJugador,numPartido, l, e, v);
-                TrabajoPractico31.MisColecciones.matPronosticos[i]= pronostico;
+                TrabajoPractico32.MisColecciones.matPronosticos[i]= pronostico;
 
                 i = i + 1;
-                TrabajoPractico31.cantPronosticos = i;
+                TrabajoPractico32.cantPronosticos = i;
             }
             System.out.println("Leidos " + i + " pronosticos de la DB");
             // Esto se utiliza para cerrar la conexión con la base de datos
             resultado.close();
-            TrabajoPractico31.consulta.close();
-            TrabajoPractico31.conexion.close();
+            TrabajoPractico32.consulta.close();
+            TrabajoPractico32.conexion.close();
         } catch (SQLException se) {
             // Excepción ante problemas de conexión
             //se.printStackTrace();
-            errorDeLectura("tp - Pronosticos", TrabajoPractico31.conexion, TrabajoPractico31.consulta, 1);
-            cerrarConexionDB("tp", TrabajoPractico31.conexion, TrabajoPractico31.consulta);
+            errorDeLectura("tp - Pronosticos", TrabajoPractico32.conexion, TrabajoPractico32.consulta, 1);
+            cerrarConexionDB("tp", TrabajoPractico32.conexion, TrabajoPractico32.consulta);
             System.exit(1);
         }
 
         // ***** REDIMENSIONO LA MATRIZ **************
-        TrabajoPractico31.MisColecciones.matPronosticos = Arrays.copyOfRange(TrabajoPractico31.MisColecciones.matPronosticos, 0, i);
+        TrabajoPractico32.MisColecciones.matPronosticos = Arrays.copyOfRange(TrabajoPractico32.MisColecciones.matPronosticos, 0, i);
     }
 
 }

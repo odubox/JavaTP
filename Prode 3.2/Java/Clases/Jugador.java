@@ -6,7 +6,7 @@ public class Jugador {
 	private int idJ;
 	private String nombre;
 	private int puntos;
-	
+
 	public Jugador(int idJ, String nombre) {
 		super();
 		this.idJ = idJ;
@@ -32,7 +32,13 @@ public class Jugador {
 		this.puntos = puntos;
 	}
 
-	public static void mostrarGanadores(Jugador[] jugadores) {
+	public static void ordenarPorPuntos(Jugador[] jugadores) {
+		Arrays.sort(jugadores, new Comparator<Jugador>() {
+			@Override
+			public int compare(Jugador jugador1, Jugador jugador2) {
+				return Integer.compare(jugador2.getpuntos(), jugador1.getpuntos());
+			}
+		});
 
 		System.out.println("Matriz de jugadores ordenada por puntos:");
 		System.out.println("Id");

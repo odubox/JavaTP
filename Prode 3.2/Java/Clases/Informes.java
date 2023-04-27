@@ -1,7 +1,6 @@
 package Clases;
 
-import Prodep.TrabajoPractico31;
-
+import Prodep.TrabajoPractico32;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -12,17 +11,17 @@ public class Informes {
         System.out.println("");
         System.out.println("Estos son los partidos que se jugaron");
         System.out.println("-------------------------------------");
-        int cantPartidos = TrabajoPractico31.MisColecciones.matPartidos.length;
+        int cantPartidos = TrabajoPractico32.MisColecciones.matPartidos.length;
 
 
         for (int i = 0; i < cantPartidos; i++) {
 
-            int numPartido = TrabajoPractico31.MisColecciones.matPartidos[i].getIdPartido();
-            int numRonda = TrabajoPractico31.MisColecciones.matPartidos[i].getRonda();
-            String EquipoLocal = TrabajoPractico31.MisColecciones.matPartidos[i].getnombreEquipoLocal();
-            String EquipoVisitante = TrabajoPractico31.MisColecciones.matPartidos[i].getnombreEquipoVisitante();
-            int golesLocal = TrabajoPractico31.MisColecciones.matPartidos[i].getgLocal();
-            int golesVisitante = TrabajoPractico31.MisColecciones.matPartidos[i].getgVisitante();
+            int numPartido = TrabajoPractico32.MisColecciones.matPartidos[i].getIdPartido();
+            int numRonda = TrabajoPractico32.MisColecciones.matPartidos[i].getRonda();
+            String EquipoLocal = TrabajoPractico32.MisColecciones.matPartidos[i].getnombreEquipoLocal();
+            String EquipoVisitante = TrabajoPractico32.MisColecciones.matPartidos[i].getnombreEquipoVisitante();
+            int golesLocal = TrabajoPractico32.MisColecciones.matPartidos[i].getgLocal();
+            int golesVisitante = TrabajoPractico32.MisColecciones.matPartidos[i].getgVisitante();
 
 
             System.out.println("Partido # " + numPartido + " - (Ronda " + numRonda + "):" + " : " + EquipoLocal + " vs " + EquipoVisitante
@@ -34,14 +33,14 @@ public class Informes {
 
         System.out.println("\nEstos son los Pronosticos que se recibieron");
         System.out.println("-------------------------------------------");
-        int cantPronosticos = TrabajoPractico31.MisColecciones.matPronosticos.length;
+        int cantPronosticos = TrabajoPractico32.MisColecciones.matPronosticos.length;
         for (int i = 0; i < cantPronosticos; i++) {
 
-            int idj = TrabajoPractico31.MisColecciones.matPronosticos[i].getIdJugador();
-            int idp = TrabajoPractico31.MisColecciones.matPronosticos[i].getIdPartido();
-            int L = TrabajoPractico31.MisColecciones.matPronosticos[i].getganoLocal();
-            int E = TrabajoPractico31.MisColecciones.matPronosticos[i].getempato();
-            int V = TrabajoPractico31.MisColecciones.matPronosticos[i].getganoVisitante();
+            int idj = TrabajoPractico32.MisColecciones.matPronosticos[i].getIdJugador();
+            int idp = TrabajoPractico32.MisColecciones.matPronosticos[i].getIdPartido();
+            int L = TrabajoPractico32.MisColecciones.matPronosticos[i].getganoLocal();
+            int E = TrabajoPractico32.MisColecciones.matPronosticos[i].getempato();
+            int V = TrabajoPractico32.MisColecciones.matPronosticos[i].getganoVisitante();
 
             String resultadoPartido = L + " " + E + " " + V;
 
@@ -58,16 +57,26 @@ public class Informes {
 
         for (i = 0; i < cantJugadores; i++) {
             for (j = 0; j < cantRondas; j++) {
-                String nombreJ = TrabajoPractico31.MisColecciones.matJugadores[i].getNombre();
-                int puntosGanadosRonda = TrabajoPractico31.MisColecciones.matResultadoXronda[i][j].getPuntaje();
-                int puntosGanadosTotal = TrabajoPractico31.MisColecciones.matJugadores[i].getpuntos();
-                TrabajoPractico31.MisColecciones.matJugadores[i].setpuntos(puntosGanadosTotal);
-            }
-        System.out.println("");
+                String nombreJ = TrabajoPractico32.MisColecciones.matJugadores[i].getNombre();
+                int puntosGanadosRonda = TrabajoPractico32.MisColecciones.matResultadoXronda[i][j].getPuntaje();
+                int puntosGanadosTotal = TrabajoPractico32.MisColecciones.matJugadores[i].getpuntos();
 
+                int siGanoTodasRondas = cantRondas * Configuracion.puntosSiAcierta;
+                if (puntosGanadosRonda == siGanoTodasRondas) {
+                    System.out.println(nombreJ + " obtuvo " + puntosGanadosRonda + " puntos en la ronda " + (j + 1) + " y suma " + Configuracion.puntosExtrasRonda + " puntos extras por haber ganado toda la ronda ");
+                    puntosGanadosTotal =puntosGanadosTotal + Configuracion.puntosExtrasRonda;
+                    TrabajoPractico32.MisColecciones.matJugadores[i].setpuntos(puntosGanadosTotal);
+                } else {
+                    System.out.println(nombreJ + " obtuvo " + puntosGanadosRonda + " puntos en la ronda " + (j + 1));
+                }
+
+
+            }
+            System.out.println("");
+
+        }
+        Jugador.ordenarPorPuntos(TrabajoPractico32.MisColecciones.matJugadores);
     }
-        Jugador.mostrarGanadores(TrabajoPractico31.MisColecciones.matJugadores);
-}
 
         public static void errorDeLectura(String nombreDB, Connection conexion, Statement consulta, int tipoerror) {
             String leyendaError=null;
